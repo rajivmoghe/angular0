@@ -54,7 +54,7 @@ export class DishdetailComponent implements OnInit {
   createCommentForm(): any {
     this.commentForm = this.cfb.group({
       author: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
-      rating: 3,
+      rating: 5,
       comment: ['', [Validators.required, Validators.minLength(7), Validators.maxLength(200)]],
       date: ''
     });
