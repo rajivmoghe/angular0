@@ -1,0 +1,113 @@
+<div class="container" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.gt-md="space-around center"
+  fxLayoutGap="10px" fxLayoutGap.xs="0">
+
+  <div fxFlex="40" *ngIf="dish">
+    <div fxFlex>
+      <md-card>
+        <md-card-header>
+          <md-card-title>
+            <h3>{{dish.name|uppercase}}</h3>
+          </md-card-title>
+        </md-card-header>
+        <img md-card-image src="{{dish.image}}" alt="{{dish.name}}">
+        <md-card-content>
+          <p> {{dish.description}} </p>
+        </md-card-content>
+        <md-card-actions>
+          <button md-button [routerLink]="['/dishdetail', prev]">
+            <span class="fa fa-chevron-left fa-lg"></span>
+          </button>
+          <button md-button (click)="goBack()">Back</button>
+          <button md-button>LIKE</button>
+          <button md-button>SHARE</button>
+          <span class="flex-spacer"></span>
+          <button md-button [routerLink]="['/dishdetail', next]">
+            <span class="fa fa-chevron-right fa-lg"></span>
+          </button>
+        </md-card-actions>
+      </md-card>
+    </div>
+    <div [hidden]="dish">
+      <md-spinner></md-spinner>
+      <h4>Fetching dish... Please wait.</h4>
+    </div>
+
+
+  </div>
+
+  <div fxFlex="40" *ngIf="dish">
+    <div fxFlex>
+      <md-card>
+        <md-card-header>
+          <md-card-title>
+            <h3>Comments</h3>
+          </md-card-title>
+        </md-card-header>
+        <md-card-content>
+          <md-list fxFlex>
+            <md-list-item *ngFor="let comment of dish.comments">
+              <h1 md-line> {{comment.comment}} </h1>
+              <p md-line>
+                <span> {{comment.rating}} Stars</span>
+              </p>
+              <p md-line>
+                <span>-- {{comment.author}}, {{comment.date | date}} </span>
+              </p>
+            </md-list-item>
+          </md-list>
+
+
+          <md-list *ngIf="commentForm.valid">
+            <md-list-item>
+              <h1 md-line> {{ commentForm.get('comment').value}} </h1>
+              <p md-line> {{ commentForm.get('rating').value}} Stars</p>
+              <p md-line>
+                <span>-- {{ commentForm.get('author').value}}</span>
+              </p>
+            </md-list-item>
+          </md-list>
+        </md-card-content>
+      </md-card>
+    </div>
+    <div [hidden]="dish">
+      <md-spinner></md-spinner>
+      <h4>Fetching dish comments... Please wait.</h4>
+    </div>
+    <p></p>
+    <div fxFlex fxFlexOffset="10px" class="full-width">
+      <md-card>
+        <md-card-header>
+          <h4>Your Comments...</h4>
+          <!-- p>{{ commentForm.value | json }} {{ commentForm.status | json }}</p -->
+        </md-card-header>
+        <md-card-content>
+          <form novalidate [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+            <p>
+              <md-input-container class="half-width" dividerColor="{{(commentErrors.author) ? 'warn' : 'primary'}}">
+                <input mdInput formControlName="author" placeholder="Name" type="text">
+                <md-hint>
+                  <span [hidden]="!(commentErrors.author)">
+                    {{commentErrors.author}}</span>
+                </md-hint>
+              </md-input-container>
+            </p>
+            <md-slider thumbLabel tickInterval="1" formControlName="rating" step="1" min="1" max="5">
+            </md-slider>
+            <p>
+              <md-input-container class="form-size" dividerColor="{{(commentErrors.comment) ? 'warn' : 'primary'}}">
+                <textarea mdInput formControlName="comment" placeholder="Comments..." rows=6></textarea>
+                <md-hint>
+                  <span [hidden]="!(commentErrors.comment)">
+                    {{commentErrors.comment}}</span>
+                </md-hint>
+              </md-input-container>
+            </p>
+            <button type="submit" md-button class="background-primary text-floral-white" [disabled]="commentForm.invalid">Submit</button>
+          </form>
+        </md-card-content>
+      </md-card>
+    </div>
+
+  </div>
+
+</div>
