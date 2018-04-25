@@ -14,15 +14,15 @@ export class LeaderService {
   constructor() { }
 
   getLeaders(): Observable<Leader[]> {
-    return Observable.of(LEADERS).delay(2000);
+    return Observable.of(LEADERS).delay(500);
   }
 
   getLeader(id: number): Observable<Leader> {
-    return Observable.of(LEADERS.filter(leader => leader.id === id)[0]).delay(2000);
+    return Observable.of(LEADERS.filter(leader => leader.id === id)[0]).delay(500);
   }
 
   getFeaturedLeader(): Observable<Leader> {
-    return Observable.of(LEADERS.filter(leader => leader.featured)[0]).delay(1600);
+    return Observable.of(LEADERS.filter(leader => leader.featured)[0]).delay(250);
   }
 
 }
