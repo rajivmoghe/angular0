@@ -20,6 +20,11 @@
         </md-card-actions>
       </md-card>
     </div>
+    <div [hidden]="dish">
+      <md-spinner></md-spinner>
+      <h4>Fetching dish... Please wait.</h4>
+  </div>
+
 
   </div>
 
@@ -47,6 +52,11 @@
         </md-card-content>
       </md-card>
     </div>
+    <div [hidden]="dish">
+      <md-spinner></md-spinner>
+      <h4>Fetching dish comments... Please wait.</h4>
+  </div>
+
 
   </div>
 
