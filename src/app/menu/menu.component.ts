@@ -12,7 +12,6 @@ import { DishService } from '../services/dish.service';
 export class MenuComponent implements OnInit {
 
   dishes: Dish[];
-  selectedDish: Dish;
 
   constructor(private dishService: DishService,
   @Inject('BaseURL') private BaseURL) { }
@@ -22,7 +21,4 @@ export class MenuComponent implements OnInit {
       .subscribe(dishlist => this.dishes = dishlist);
   }
 
-  onSelect(dish: Dish) {
-    this.selectedDish = dish;
-  }
 }
