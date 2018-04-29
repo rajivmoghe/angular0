@@ -26,6 +26,8 @@ export class DishdetailComponent implements OnInit {
   commentForm: FormGroup;
   comment: Comment;
 
+  errMess: string;
+
   commentErrors = {
     'author': '',
     'comment': '',
@@ -74,7 +76,6 @@ export class DishdetailComponent implements OnInit {
       // clear previous error message (if any)
       this.commentErrors[field] = '';
       const control = form.get(field);
-      console.log('onCommentChanged ' + field + ' is ' + control.status);
       if (control && control.dirty && !control.valid) {
         const messages = this.commentValidationMessages[field];
         // tslint:disable-next-line:forin
@@ -100,10 +101,14 @@ export class DishdetailComponent implements OnInit {
     this.route.params
       .switchMap((params: Params) =>
         this.dishservice.getDish(+params['id']))
-      .subscribe(aDish => {
-        this.dish = aDish;
-        this.setPrevNext(aDish.id);
-      });
+      .subscribe(
+        aDish => {
+          this.dish = aDish;
+          this.setPrevNext(aDish.id);
+        },
+        errmess =>
+          this.errMess = <any>errmess
+      );
   }
 
   setPrevNext(dishId: number): void {

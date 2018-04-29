@@ -14,10 +14,14 @@
       </p>
     </md-card-content>
   </md-card>
-  <div [hidden]="dish">
+  <div [hidden]="dish || disherrMess ">
     <md-spinner></md-spinner>
     <h4>Fetching dish... Please wait.</h4>
-</div>
+  </div>
+  <div fxFlex *ngIf="disherrMess">
+    <h2>Error</h2>
+    <h4>{{disherrMess}} </h4>
+  </div>
 
 
   <md-card *ngIf="promotion" fxFlex>
@@ -36,7 +40,7 @@
   <div [hidden]="promotion">
     <md-spinner></md-spinner>
     <h4>Fetching promotion... Please wait.</h4>
-</div>
+  </div>
 
 
   <md-card *ngIf="leader" fxFlex>
@@ -55,6 +59,6 @@
   <div [hidden]="leader">
     <md-spinner></md-spinner>
     <h4>Fetching leader... Please wait.</h4>
-</div>
+  </div>
 
 </div>
