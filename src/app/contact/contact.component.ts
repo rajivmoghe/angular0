@@ -71,7 +71,6 @@ export class ContactComponent implements OnInit {
   }
 
 onValueChanged(data?: any) {
-  console.log('onvalueChanged is called...' + this.printObj(data));
   if (!this.feedbackForm) { return; }
   const form = this.feedbackForm;
 
@@ -92,7 +91,6 @@ onValueChanged(data?: any) {
 
 onSubmit() {
   this.feedback = this.feedbackForm.value;
-  console.log(this.feedback);
   this.feedbackForm.reset({
     firstname: '',
     lastname: '',
