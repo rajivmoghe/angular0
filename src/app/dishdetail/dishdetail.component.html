@@ -32,9 +32,9 @@
       <h4>Fetching dish... Please wait.</h4>
     </div>
     <div fxFlex *ngIf="errMess">
-        <h2>Error</h2>
-        <h4>{{errMess}} </h4>
-      </div>
+      <h2>Error</h2>
+      <h4>{{errMess}} </h4>
+    </div>
   </div>
 
   <div fxFlex="40" *ngIf="dish">
@@ -58,7 +58,6 @@
             </md-list-item>
           </md-list>
 
-
           <md-list *ngIf="commentForm.valid">
             <md-list-item>
               <h1 md-line> {{ commentForm.get('comment').value}} </h1>
@@ -75,8 +74,7 @@
       <md-spinner></md-spinner>
       <h4>Fetching dish comments... Please wait.</h4>
     </div>
-    <p></p>
-    <div fxFlex fxFlexOffset="10px" class="full-width">
+    <div fxFlex="40">
       <md-card>
         <md-card-header>
           <h4>Your Comments...</h4>

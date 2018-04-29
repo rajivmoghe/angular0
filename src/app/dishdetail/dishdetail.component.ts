@@ -19,6 +19,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class DishdetailComponent implements OnInit {
 
   dish: Dish;
+  dishcopy = null;
   dishIds: number[];
   prev: number;
   next: number;
@@ -89,8 +90,10 @@ export class DishdetailComponent implements OnInit {
   onSubmit() {
     this.comment = this.commentForm.value;
     this.comment.date = new Date().toISOString();
-    this.dish.comments.push(this.comment);
-    this.commentForm.reset();
+    this.dishcopy.comments.push(this.comment);
+    this.dishcopy.save()
+      .subscribe(sDish => this.dish = sDish);
+    this.commentForm.reset({ rating: 5 });
   }
 
   ngOnInit() {
@@ -103,6 +106,7 @@ export class DishdetailComponent implements OnInit {
       .subscribe(
         aDish => {
           this.dish = aDish;
+          this.dishcopy = aDish;
           this.setPrevNext(aDish.id);
         },
         errmess =>
