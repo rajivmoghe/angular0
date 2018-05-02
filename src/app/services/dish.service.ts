@@ -4,7 +4,6 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import { baseURL } from '../shared/baseurl';
-import { ProcessHTTPMsgService } from './process-httpmsg.service';
 
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/catch';
@@ -15,8 +14,7 @@ import { RestangularConfigFactory } from '../shared/restConfig';
 @Injectable()
 export class DishService {
 
-  constructor(private restangular: Restangular,
-    private processHTTPMsgService: ProcessHTTPMsgService) { }
+  constructor(private restangular: Restangular) { }
 
   getDishes(): Observable<Dish[]> {
     return this.restangular.all('dishes').getList();
@@ -33,12 +31,10 @@ export class DishService {
   }
 
   getDishIds(): Observable<number[]> {
-    return this.getDishes()
+    return this.restangular.all('dishes').getList()
       .map(dishes => {
         return dishes.map(dish => dish.id);
       })
-      .catch(err => {
-        return this.processHTTPMsgService.handleError(err);
-      });
+      .catch(err => err);
   }
 }

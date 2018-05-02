@@ -55,6 +55,8 @@ export class DishdetailComponent implements OnInit {
     this.createCommentForm();
   }
 
+  getBaseUrl() { return this.BaseURL; }
+
   createCommentForm(): any {
     this.commentForm = this.cfb.group({
       author: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)]],

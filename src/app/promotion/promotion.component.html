@@ -1,0 +1,55 @@
+<div class="container" fxLayout="column" fxLayoutGap="10px">
+
+  <div fxFlex>
+    <div>
+      <h3>Menu</h3>
+      <hr>
+    </div>
+  </div>
+
+  <div fxFlex *ngIf="promotions">
+    <md-grid-list cols="2" rowHeight="200px">
+      <md-grid-tile *ngFor="let promo of promotions" [routerLink]="['/dishdetail', promo.id]">
+        <img height="200px" src="{{getBaseUrl() + promo.image}}" alt="{{promo.name}}">
+        <md-grid-tile-footer>
+          <h1 md-line> {{promo.name | uppercase}} </h1>
+          <p></p>
+          <h4 md-line> {{promo.description}} </h4>
+        </md-grid-tile-footer>
+      </md-grid-tile>
+    </md-grid-list>
+  </div>
+  <div fxFlex *ngIf="errMess">
+    <h2>Error</h2>
+    <h4>{{errMess}} </h4>
+  </div>
+  <div [hidden]="promotions || errMess">
+    <md-spinner></md-spinner>
+    <h4>Fetching promotions... Please wait.</h4>
+  </div>
+
+  <div fxFlex *ngIf="featured">
+    <md-grid-list cols="2" rowHeight="200px">
+      <md-grid-tile>
+        <img height="200px" src="{{getBaseUrl() + featured.image}}" alt="{{featured.name}}">
+        <md-grid-tile-header>
+          Featured Tile
+        </md-grid-tile-header>
+        <md-grid-tile-footer>
+          <h1 md-line> {{featured.name | uppercase}} </h1>
+          <p></p>
+          <h4 md-line> {{featured.description}} </h4>
+        </md-grid-tile-footer>
+      </md-grid-tile>
+    </md-grid-list>
+  </div>
+  <div fxFlex *ngIf="errMess">
+    <h2>Error</h2>
+    <h4>{{errMess}} </h4>
+  </div>
+  <div [hidden]="promotions || errMess">
+    <md-spinner></md-spinner>
+    <h4>Fetching promotions... Please wait.</h4>
+  </div>
+
+</div>
